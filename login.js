@@ -5,7 +5,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const stripe = require("stripe")(process.env.STRIP_TEST_KEY);
 
-const YOUR_DOMAIN = "http://localhost:3050";
+const YOUR_DOMAIN = process.env.MY_URL;
 // const encoder = bodyParser.urlencoded();
 const nm = require('nodemailer');
 // var cors = require('cors');
