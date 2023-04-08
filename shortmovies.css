@@ -1,0 +1,158 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: linear-gradient(to right, rgb(5, 38, 32), rgb(16, 39, 5));
+}
+
+/* header */
+.header {
+  color: #DC5F00;
+  display: flex;
+  padding: 20px;
+  align-items: center;
+  justify-content: space-between;
+  overflow-x: scroll;
+}
+
+.header::-webkit-scrollbar {
+  display: none;
+}
+
+.header {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.header>img {
+  object-fit: contain;
+  height: 80px;
+}
+
+.header__icons {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.header__icon {
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  cursor: pointer;
+}
+
+.header__icon p {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: small;
+  display: none;
+}
+
+.header__icon:hover p {
+  display: inline-flex;
+}
+
+.header__icon .material-icons {
+  font-size: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.active>p {
+  display: inline-flex;
+}
+
+.banner__button {
+  cursor: pointer;
+  color: whitesmoke;
+  outline: none;
+  border: none;
+  font-size: medium;
+  font-weight: 500;
+  border-radius: 0.2vw;
+  padding-left: 2rem;
+  padding-right: 7rem;
+  margin-right: 2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: #DC5F00;
+}
+
+.banner__button:hover {
+  color: #000;
+  background-color: #e6e6e6;
+  transition: all 0.2s;
+}
+
+/* .banner--fadeBottom {
+  margin-top: 145px;
+  height: 7.4rem;
+  background-image: linear-gradient(180deg, transparent, rgba(37, 37, 37, 0.61), #111);
+} */
+
+/* nav */
+.nav {
+  display: flex;
+  color: #ffff;
+  overflow-x: scroll;
+  padding: 10px;
+  padding-left: 40px;
+}
+
+.nav::-webkit-scrollbar {
+  display: none;
+}
+
+.nav {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.nav h2 {
+  cursor: pointer;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-weight: 500;
+  opacity: 0.7;
+  transition: transform 50ms ease-out;
+}
+
+.nav h2:hover {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* movies */
+.movies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.movie {
+  color: white;
+  width: 500px;
+  height: 400px;
+  padding: 20px;
+  transition: transform 100ms;
+}
+
+.movie img {
+  height: 300px;
+  object-fit: contain;
+  width: 460px;
+}
+
+.movie:hover {
+  transform: scale(1.09);
+}
+
+.movie h2 {
+  padding-top: 10px;
+}

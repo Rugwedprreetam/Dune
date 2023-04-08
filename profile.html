@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DUNE</title>
+  <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+	<link rel="stylesheet" href="/profile.css">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+  
+	<div class="frame">
+    <div class="center">
+      <div class="card">
+        <div class="left">
+          <div class="avatar">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <img src="/images/profile.png" />
+          </div>
+          <div class="info">
+            <!-- user id -->
+
+            <span class="big"><%=user_name%></span><span class="small"><%=email%></span>
+          </div>
+          
+          <div class="buttons">
+          <form method="get" action='/movies'>
+            <input type="hidden" value="<%=phonenumber%>" name="uid"/>
+           <button class="flw">Home</button>
+          </form>
+            <form action="/login.html">
+            <button class="msg">Logout</button></form>
+          </div>
+        </div>
+        <div class="right">
+          <div class="stats posts">
+            <span class="big"><i>User_id</i></span><span class="small"><%=phonenumber%></span>
+          </div>
+          <div class="stats likes">
+            <span class="big">started</span><span class="small"><%=start%></span>
+          </div>
+          <div class="stats flwrs">
+            <span class="big">Ends</span><span class="small"><%=end%></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

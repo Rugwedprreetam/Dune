@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>let's go......!</title>
+	<link rel="icon" type="image/x-icon" href="/images/favicon.png">
+	<link rel="stylesheet" href="/sign_upstyle.css">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<div class="screen">
+			<div class="screen__content">
+				<form class="login" action="/signup" method="post" onsubmit="Conform()">
+					<div class="login__field">
+						<i class="login__icon fas fa-user"></i>
+						<input type="text" name="User_id" class="login__input" placeholder="User name">
+					</div>
+					<div class="login__field">
+						<i class="login__icon fas fa-lock"></i>
+						<input type="password" name="pswd" class="login__input" placeholder="Password">
+					</div>
+                    <div class="login__field">
+						<i class="login__icon fas fa-lock"></i>
+						<input type="password" name="cpswd" class="login__input" placeholder="Conform Password">
+					</div>
+                    <div class="login__field">
+						<i class="login__icon fas fa-lock"></i>
+						<input type="tel" name="phonenumber" class="login__input" placeholder="phone number">
+					</div>
+                    <input type="hidden" name="email" value = "<%= Email%>"/>
+					<button class="button login__submit" type="submit" value="">
+						<span class="button__text">Log In Now</span>
+						<i class="button__icon fas fa-chevron-right"></i>
+					</button>				
+				</form>
+				
+			</div>
+			<div class="screen__background">
+				<span class="screen__background__shape screen__background__shape4"></span>
+				<span class="screen__background__shape screen__background__shape3"></span>		
+				<span class="screen__background__shape screen__background__shape2"></span>
+				<span class="screen__background__shape screen__background__shape1"></span>
+			</div>		
+		</div>
+	</div>
+    <script>
+        function Conform() {
+            var frist = document.getElementsByName("pswd")[0] ;
+            var sec = document.getElementsByName("cpswd")[0] ;
+            if(frist==sec )
+            {
+                return true ;
+            }
+            else
+            {
+                return false ;
+            }
+        }
+    </script>
+</body>
+</html>
