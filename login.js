@@ -229,12 +229,12 @@ app.post("/sendotp", (req, res) => {
     html: `<p>Enter the otp: ${otp} to verify your email address</p>`,
   };
   // insert into exo values ('shd@2020' , 8526 , addtime(localtimestamp , '0:2:0') );
-  connection.query(
-    "delete from otp where mail_id = ?",[email],
-    function (error, results, fields) {
-      if (error) console.log(error);
-    }
-  );
+  // connection.query(
+  //   "delete from otp where mail_id = ?",[email],
+  //   function (error, results, fields) {
+  //     if (error) console.log(error);
+  //   }
+  // );
   connection.query(
     "insert into otp values (? , ? , addtime(localtimestamp , '0:2:30') )",
     [email, otp],
