@@ -75,17 +75,25 @@ app.post("/payment", async (req, res) => {
 
 app.get("/paysucess", (req, res) => {
   const product = req.query;
-  connection.query(`delete from sub_list2 where user_id = '${product.userId}'`);
   connection.query(
-    `insert into sub_list2(user_id,start_date,end_date) values (? , localtimestamp(), adddate(localtimestamp() , interval ${product.days} ${product.units}))`,
-    [product.userId],
+    `delete from sub_list2 where user_id = '${product.userId}'`,
     function (error, results, fields) {
-      if(error)
-      console.log(error);
+      if (error) console.log(error);
+      else {
+        connection.query(
+          `insert into sub_list2(user_id,start_date,end_date) values (? , localtimestamp(), adddate(localtimestamp() , interval ${product.days} ${product.units}))`,
+          [product.userId],
+          function (error, results, fields) {
+            if (error) console.log(error);
+            else {
+              console.log(product.userId);
+              res.render(__dirname + "/paysucess");
+            }
+          }
+        );
+      }
     }
   );
-  console.log(product.userId);
-  res.render(__dirname + "/paysucess");
 });
 
 // app.get("/",function(req,res){
@@ -272,12 +280,12 @@ app.post("/verifyotp", (req, res) => {
   );
   connection.query(
     "select * from otp where mail_id = ? and otp_r = ?",
-    [email,otprecived],
+    [email, otprecived],
     function (error, results, fields) {
       if (error) console.log(error);
       else if (results.length > 0) {
         res.render(__dirname + "/sign_up.html", { Email: email });
-      }else{
+      } else {
         res.status(500).send("Invalid OTP");
       }
     }
