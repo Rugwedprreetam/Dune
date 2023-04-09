@@ -240,33 +240,36 @@ app.post("/sendotp", (req, res) => {
     html: `<p>Enter the otp: ${otp} to verify your email address</p>`,
   };
   // insert into exo values ('shd@2020' , 8526 , addtime(localtimestamp , '0:2:0') );
-  // connection.query(
-  //   "delete from otp where mail_id = ?",[email],
-  //   function (error, results, fields) {
-  //     if (error) console.log(error);
-  //   }
-  // );
   connection.query(
-    "insert into otp values (? , ? , addtime(localtimestamp , '0:2:30') )",
-    [email, otp],
+    "delete from otp where mail_id = ?",
+    [email],
     function (error, results, fields) {
       if (error) console.log(error);
-      else if (results.affectedRows > 0) {
+      else {
+        connection.query(
+          "insert into otp values (? , ? , addtime(localtimestamp , '0:2:30') )",
+          [email, otp],
+          function (error, results, fields) {
+            if (error) console.log(error);
+            else if (results.affectedRows > 0) {
+              transporter.sendMail(options, function (error, info) {
+                if (error) {
+                  console.log(error);
+                  res.status(500).send("couldn't send");
+                } else {
+                  setTimeout(() => {
+                    savedOTPS.delete(email);
+                    console.log("time out");
+                  }, 60000);
+                  res.render(__dirname + "/otp.html", { Email: email });
+                }
+              });
+            }
+          }
+        );
       }
     }
   );
-  transporter.sendMail(options, function (error, info) {
-    if (error) {
-      console.log(error);
-      res.status(500).send("couldn't send");
-    } else {
-      setTimeout(() => {
-        savedOTPS.delete(email);
-        console.log("time out");
-      }, 60000);
-      res.render(__dirname + "/otp.html", { Email: email });
-    }
-  });
 });
 
 app.post("/verifyotp", (req, res) => {
@@ -276,20 +279,23 @@ app.post("/verifyotp", (req, res) => {
     "delete from otp where time < localtimestamp",
     function (error, results, fields) {
       if (error) console.log(error);
-    }
-  );
-  connection.query(
-    "select * from otp where mail_id = ? and otp_r = ?",
-    [email, otprecived],
-    function (error, results, fields) {
-      if (error) console.log(error);
-      else if (results.length > 0) {
-        res.render(__dirname + "/sign_up.html", { Email: email });
-      } else {
-        res.status(500).send("Invalid OTP");
+      else {
+        connection.query(
+          "select * from otp where mail_id = ? and otp_r = ?",
+          [email, otprecived],
+          function (error, results, fields) {
+            if (error) console.log(error);
+            else if (results.length > 0) {
+              res.render(__dirname + "/sign_up.html", { Email: email });
+            } else {
+              res.status(500).send("Invalid OTP");
+            }
+          }
+        );
       }
     }
   );
+
   // console.log(otprecived);
   // console.log(savedOTPS);
   // if (savedOTPS.get(email) === otprecived) {
