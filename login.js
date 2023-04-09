@@ -212,15 +212,16 @@ app.post('/sendotp', (req, res) => {
     let otp = ''
     for (i = 0; i < limit; i++) {
         otp += digits[Math.floor(Math.random() * 10)];
-
     }
     var options = {
         from: 'rprreetam@gmail.com',
         to: `${email}`,
-        subject: "Testing node emails",
+        subject: "Dune verification code",
         html: `<p>Enter the otp: ${otp} to verify your email address</p>`
 
     };
+    savedOTPS[email] = otp;
+    console.log(savedOTPS);
     transporter.sendMail(
         options, function (error, info) {
             if (error) {
@@ -228,7 +229,6 @@ app.post('/sendotp', (req, res) => {
                 res.status(500).send("couldn't send")
             }
             else {
-                savedOTPS[email] = otp;
                 setTimeout(
                     () => {
                         delete savedOTPS.email
@@ -243,6 +243,7 @@ app.post('/sendotp', (req, res) => {
 app.post('/verifyotp', (req, res) => {
     let otprecived = req.body.otp;
     let email = req.body.email;
+    console.log(savedOTPS);
     if (savedOTPS[email] == otprecived) {
         res.render(__dirname+"/sign_up.html",{Email:email});
     }
