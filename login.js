@@ -244,6 +244,7 @@ app.post('/sendotp', (req, res) => {
 app.post('/verifyotp', (req, res) => {
     let otprecived = req.body.otp;
     let email = req.body.email;
+    console.log(otprecived);
     console.log(savedOTPS);
     if (savedOTPS[email] == otprecived) {
         res.render(__dirname+"/sign_up.html",{Email:email});
