@@ -232,7 +232,7 @@ app.post('/sendotp', (req, res) => {
                 setTimeout(
                     () => {
                         delete savedOTPS.email
-                    }, 30000
+                    }, 60000
                 )
                 res.render(__dirname+"/otp.html",{Email:email});
             }
