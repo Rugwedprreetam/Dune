@@ -189,9 +189,8 @@ app.get("/pora",function(req,res){
 
 ///////////////    OTP SECTION //////////////////////////////////////     
 
-let savedOTPS = {
+ global.savedOTPS = new Map();
 
-};
 var transporter = nm.createTransport(
     {
         host: "smtp.gmail.com",
@@ -220,7 +219,7 @@ app.post('/sendotp', (req, res) => {
         html: `<p>Enter the otp: ${otp} to verify your email address</p>`
 
     };
-    savedOTPS[email] = otp;
+    savedOTPS.set(email,otp);
     console.log(savedOTPS);
     transporter.sendMail(
         options, function (error, info) {
@@ -231,7 +230,7 @@ app.post('/sendotp', (req, res) => {
             else {
                 setTimeout(
                     () => {
-                        delete savedOTPS.email
+                        savedOTPS.delete(email);
                         console.log("time out");
                     }, 60000
                 )
@@ -246,7 +245,7 @@ app.post('/verifyotp', (req, res) => {
     let email = req.body.email;
     console.log(otprecived);
     console.log(savedOTPS);
-    if (savedOTPS[email] == otprecived) {
+    if (savedOTPS.get(email) === otprecived) {
         res.render(__dirname+"/sign_up.html",{Email:email});
     }
     else {
