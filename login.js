@@ -226,12 +226,13 @@ app.post('/sendotp', (req, res) => {
         options, function (error, info) {
             if (error) {
                 console.log(error);
-                res.status(500).send("couldn't send")
+                res.status(500).send("couldn't send");
             }
             else {
                 setTimeout(
                     () => {
                         delete savedOTPS.email
+                        console.log("time out");
                     }, 60000
                 )
                 res.render(__dirname+"/otp.html",{Email:email});
