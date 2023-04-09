@@ -79,7 +79,10 @@ app.get("/paysucess", (req, res) => {
   connection.query(
     `insert into sub_list2(user_id,start_date,end_date) values (? , localtimestamp(), adddate(localtimestamp() , interval ${product.days} ${product.units}))`,
     [product.userId],
-    function (error, results, fields) {}
+    function (error, results, fields) {
+      if(error)
+      console.log(error);
+    }
   );
   console.log(product.userId);
   res.render(__dirname + "/paysucess");
