@@ -4,7 +4,7 @@ const path = require("path");
 const stripe = require("stripe")("sk_test_51MgXvgSIlViCvpUMNyEHDD4tTndHP4CUsfJUllJ8geS3XRtrY45Y74S8Bb7oBs390wpaRB01TPEvnKmaNRc2zAt300UvvuCahp");
 
 const YOUR_DOMAIN = "http://localhost:3050";
-
+b
 // static files
 app.use(express.static(path.join(__dirname, "views")));
 
