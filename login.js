@@ -96,7 +96,7 @@ app.get("/paysucess", (req, res) => {
   );
 });
 
-// app.get("/",function(req,res){
+// app.get("/",function(req,res){//yyyy
 //   res.sendFile(__dirname + "/openingstyle.css");
 // })
 
