@@ -19,7 +19,7 @@ app.set("views", __dirname);
 
 app.use(express.json());
 
-//////////////database connetion ///////////////////////////////////////
+//////////////database connetion /////////////////////////////////////// Updated
 
 const connection = mysql.createPool({
   host: "db4free.net",
